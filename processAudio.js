@@ -92,7 +92,16 @@ recognizeStream.on('close', function(event) {
 
     naturalLanguageUnderstanding.analyze(analyzeParams)
     .then(analysisResults => {
-        console.log(JSON.stringify(analysisResults, null, 2));
+        const res = analysisResults.result;
+        const customerObj = {};
+        res.entities.forEach(entity => {
+          if (entity.type == "ORDER_ITEMS") {
+            customerObj[entity.type] = entity.text.match(/(\d+(\s[a-zA-Z]+){1,4})/g);
+          } else {
+            customerObj[entity.type] = entity.text;
+          }
+        });
+        console.log(customerObj);
     })
     .catch(err => {
         console.log('error:', err);
