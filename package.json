@@ -1,0 +1,16 @@
+{
+  "name": "pandemic-node",
+  "version": "1.0.0",
+  "description": "An automated natural language processing phone line to place orders during the pandemic.",
+  "main": "index.js",
+  "scripts": {
+    "nlu": "node index.js",
+    "stt": "node processAudio.js"
+  },
+  "author": "Alif Munim",
+  "license": "MIT",
+  "dependencies": {
+    "ibm-watson": "^5.6.2",
+    "words-to-numbers": "^1.5.1"
+  }
+}
