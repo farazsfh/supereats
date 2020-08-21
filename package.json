@@ -10,7 +10,9 @@
   "author": "Alif Munim",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.2",
     "ibm-watson": "^5.6.2",
+    "request": "^2.88.2",
     "words-to-numbers": "^1.5.1"
   }
 }
