@@ -12,11 +12,19 @@ app.get('/', (req, res) => {
 });
 
 app.post('/orders/add', (req, res) => {
-    const order = new Order({
-        name: req.body.name,
-        address: req.body.address,
-        items: [item1, item2]
+    order = new Order(req.body);
+
+    order.save()
+    .then(data => {
+        res.json(data);
     })
+    .catch(err => {
+        res.json({message: err});
+    })
+});
+
+app.post('/items/add', (req, res) => {
+    item = new Item(req.body);
 
     order.save()
     .then(data => {

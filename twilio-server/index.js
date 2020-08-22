@@ -28,24 +28,22 @@ app.post('/transcribe', (req, res) => {
 
     axios.get(luisquery)
         .then((res) => {
-            var address = res.data.prediction.entities.$instance.Address[0].text
+            var name = res.data.prediction.entities.Name[0];
+            var address = res.data.prediction.entities.$instance.Address[0].text;
             
-            itemsJson = res.data.prediction.entities.Item
-            var items = []
+            itemsJson = res.data.prediction.entities.Item;
+            var items = [];
             for(var i = 0; i < itemsJson.length; i++) {
-                var quantity = itemsJson[i].Quantity[0];
-                var product = itemsJson[i].Product[0];
-                items.push({quantity: quantity, product: product})
+                items.push({quantity: Number(itemsJson[i].Quantity[0]), product: itemsJson[i].Product[0]});
             }
 
-            /* axios.post("http://localhost:5000/orders/add")
+            axios.post("http://localhost:5000/orders/add", {name: name, address: address, items: items})
             .then((res) => {
-                var address = res.data.prediction.entities.$instance.Address[0].text
-                console.log(address)
+                console.log(res)
             })
             .catch((error) => {
                 console.log(error);
-            }); */
+            });
         })
         .catch((error) => {
             console.log(error);
