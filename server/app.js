@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+const cors = require('cors');
+
+app.use(cors());
 app.use(express.json())
 
 const Order = require('./models/Order');
@@ -10,6 +13,10 @@ let port = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
     res.send('Server is connected.')
+});
+
+app.get('/test/', (req, res) => {
+    res.send({count: 1})
 });
 
 app.post("/orders/", (req, res) => {

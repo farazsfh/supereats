@@ -10,7 +10,7 @@ function Home() {
 						<h2 className="masthead-subheading mb-0">
 							Easy grocery shopping for everyone!
 						</h2>
-						<a href="#" className="btn btn-primary btn-xl rounded-pill mt-5">
+						<a href="#learn-more" className="btn btn-primary btn-xl rounded-pill mt-5">
 							Learn More
 						</a>
 					</div>
@@ -21,6 +21,7 @@ function Home() {
 				<div className="bg-circle-4 bg-circle"></div>
 			</header>
 
+			<a id="learn-more"></a>
 			<section>
 				<div className="container">
 					<div className="row align-items-center">
