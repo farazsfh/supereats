@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json())
 
 const Order = require('./models/Order');
-const Item = require('./models/Item');
+const Inventory = require('./models/Inventory');
 
 let port = process.env.PORT || 5000;
 
@@ -34,10 +34,10 @@ app.get("/orders/", async (req, res) => {
 	}
 });
 
-app.post("/items/", (req, res) => {
-	item = new Item(req.body);
+app.post("/inventory/", (req, res) => {
+	inventory = new Inventory(req.body);
 
-	order
+	inventory
 		.save()
 		.then((data) => {
 			res.json(data);
@@ -45,6 +45,15 @@ app.post("/items/", (req, res) => {
 		.catch((err) => {
 			res.json({ message: err });
 		});
+});
+
+app.get("/inventory/", (req, res) => {
+	try {
+		const inventory = await Inventory.find();
+		res.json(inventory);
+	} catch (err) {
+		res.json(err);
+	}
 });
 
 app.delete('/orders', (req, res) => {
