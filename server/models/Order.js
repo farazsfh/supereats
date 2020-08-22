@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Item = require('./Item').schema;
 
 const OrderSchema = new mongoose.Schema({
     name: {
@@ -11,8 +10,31 @@ const OrderSchema = new mongoose.Schema({
         required: true,
     },
     items: {
-        type: [Item.schema],
+        type: [{
+            product: {
+                type: String,
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true,
+                default: 1
+            },
+            weight: {
+                type: String,
+                required: false
+            },
+            form: {
+                type: String,
+                required: false
+            }
+        }],
         required: true
+    },
+    date: {
+        type: Date,
+        required: true,
+        default: Date.now
     }
 });
 

@@ -3,19 +3,31 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(express.json())
 
-let port = process.env.PORT || 8000;
+const Order = require('./models/Order');
+
+let port = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
     res.send('Server is connected.')
 });
 
-app.post('/stores/add', (req, res) => {
-    const 
+app.post('/orders/add', (req, res) => {
+    const order = new Order({
+        name: req.body.name,
+        address: req.body.address,
+        items: [item1, item2]
+    })
+
+    order.save()
+    .then(data => {
+        res.json(data);
+    })
+    .catch(err => {
+        res.json({message: err});
+    })
 });
 
-app.post('/orders/add')
-
-mongoose.connect('mongodb+srv://admin:<password>@cluster0.nevls.mongodb.net/<dbname>?retryWrites=true&w=majority', 
+mongoose.connect('mongodb+srv://admin:jakepaul97@supereats.nevls.azure.mongodb.net/supereats?retryWrites=true&w=majority', 
     { useNewUrlParser: true, useUnifiedTopology: true },
     () => console.log('connected!')
 );
