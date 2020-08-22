@@ -41,6 +41,15 @@ app.get("/orders/", async (req, res) => {
 	}
 });
 
+app.get("/orders/byId/:id", async (req, res) => {
+	try {
+		const orders = await Order.findById(req.params.id);
+		res.json(orders);
+	} catch (err) {
+		res.json(err);
+	}
+});
+
 app.post("/inventory/", (req, res) => {
 	inventory = new Inventory(req.body);
 

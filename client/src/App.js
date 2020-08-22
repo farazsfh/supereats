@@ -11,6 +11,8 @@ import Inventory from "./components/Inventory";
 import Dashboard from "./components/Dashboard";
 import Orders from "./components/Orders";
 import Archive from "./components/Archive";
+import ProcessOrder from "./components/ProcessOrder";
+
 // import styled from 'styled-components';
 
 // export const Grid = styled.div``;
@@ -30,6 +32,7 @@ function App() {
 			<Route exact path="/inventory" component={Inventory} />
 			<Route exact path="/orders" component={Orders} />
 			<Route exact path="/archive" component={Archive} />
+			<Route path="/processOrder/:id" component={ProcessOrder} />
 		</Router>
 	);
 }
