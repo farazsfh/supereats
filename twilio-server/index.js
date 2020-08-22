@@ -3,24 +3,36 @@ const VoiceResponse = require('twilio').twiml.VoiceResponse;
 const app = express();
 const axios = require('axios');
 
+const exec = require("child_process").execSync;
+const { wordsToNumbers } = require("words-to-numbers");
+
 // Bodyparser setup
 const bp = require("body-parser");
 app.use(bp.urlencoded({ extended: true }));
 
 let port = process.env.PORT || 8000;
 
+function getTranscription(recordingUrl) {
+    return wordsToNumbers(exec("python3 speech.py ".concat(recordingUrl)).toString("utf8"));
+}
+
 // Route triggers on phone call
 app.post('/voice', (req, res) => {
     const twiml = new VoiceResponse();
     twiml.say('Hello welcome to Super Eats! Please state your name, address and order.');
-    twiml.record({ transcribe: true, transcribeCallback: '/transcribe' });
+    twiml.record({ transcribe: true, recordingStatusCallback: '/transcribe' });
     twiml.hangup();
     res.type('text/xml');
     res.send(twiml.toString());
 });
 
 app.post('/transcribe', (req, res) => {
-    var transcription = encodeURIComponent(req.body.TranscriptionText);
+    var recordingUrl = req.body.RecordingUrl;
+    recordingUrl = recordingUrl.concat(".wav");
+
+    var transcription = getTranscription(recordingUrl);
+    console.log(transcription);
+    transcription = encodeURIComponent(transcription);
     var from = req.body.From;
     var luisquery = "https://pandemicphoneline-authoring.cognitiveservices.azure.com/luis/prediction/v3.0/apps/be6a92b3-6bb1-4f19-bb84-d4d47439186a/slots/production/predict?subscription-key=dede97f65f9d4b49ad1911601aca2467&verbose=true&show-all-intents=true&log=true&query=";
     luisquery = luisquery.concat(transcription);
