@@ -46,13 +46,11 @@ const Dashboard = () => {
         axios
             .get('http://localhost:5000/orders/')
             .then((res) => {
+                console.log(res.data)
                 setOrders(res.data);
             })
             .catch((error) => {
                 console.log(error);
-            })
-            .then(() => {
-                console.log(orders);
             });
     }, []);
     // return (
@@ -82,6 +80,7 @@ const Dashboard = () => {
     //     </TableContainer>
     // );
     return (
+        <div>
         <Grid>
             <Row>
                 <Col size={1}>
@@ -114,6 +113,8 @@ const Dashboard = () => {
                 </Col>
             </Row>
         </Grid>
+        <h1>{orders[0].address}</h1>
+        </div>
     );
 };
 
