@@ -47,7 +47,7 @@ app.post("/inventory/", (req, res) => {
 		});
 });
 
-app.get("/inventory/", (req, res) => {
+app.get("/inventory/", async (req, res) => {
 	try {
 		const inventory = await Inventory.find();
 		res.json(inventory);
