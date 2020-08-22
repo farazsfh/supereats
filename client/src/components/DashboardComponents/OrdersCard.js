@@ -79,17 +79,16 @@ class OrdersCard extends Component {
                     alignItems="center"
                     flexDirection="column"
                 >
-                    <Text>Elevation 1</Text>
-                    <Text size={300}>Floating Panes</Text>
+                    <Text size={500}>Orders</Text>
+                    <br></br>
                     <CountUp
-                        start={-875.039}
-                        end={160527.012}
+                        start={-875}
+                        end={160527}
                         duration={2.75}
                         separator=" "
-                        decimals={4}
+                        decimals={0}
                         decimal=","
-                        prefix="EUR "
-                        suffix=" left"
+                        suffix=" orders!"
                         onEnd={() => console.log('Ended! 👏')}
                         onStart={() => console.log('Started! 💨')}
                         delay={0}
