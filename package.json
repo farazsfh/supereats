@@ -1,0 +1,19 @@
+{
+	"name": "pandemic-hotline",
+	"version": "1.0.0",
+	"description": "An automated natural language processing grocery store hotline to break down technical barriers during the pandemic.",
+	"main": "server.js",
+	"scripts": {
+		"client": "npm start --prefix client"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/alif-munim/pandemic-hotline.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/alif-munim/pandemic-hotline/issues"
+	},
+	"homepage": "https://github.com/alif-munim/pandemic-hotline#readme"
+}
