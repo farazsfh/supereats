@@ -14,27 +14,36 @@ audio_input = speechsdk.audio.AudioConfig(filename=audio_filename)
 # Creates a recognizer with the given settings
 speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_input)
 
-print("Recognizing first result...")
+# print("Recognizing first result...")
 
 done = False
 
 def stop_cb(evt):
-    print('CLOSING on {}'.format(evt))
+    """callback that stops continuous recognition upon receiving an event `evt`"""
+    # print('CLOSING on {}'.format(evt))
     speech_recognizer.stop_continuous_recognition()
     global done
     done = True
 
-# Continuous recognition
+all_results = []
+def handle_final_result(evt):
+    all_results.append(evt.result.text.lower()[:-1])
 
+speech_recognizer.recognized.connect(handle_final_result)
+# Connect callbacks to the events fired by the speech recognizer
 # speech_recognizer.recognizing.connect(lambda evt: print('RECOGNIZING: {}'.format(evt)))
-speech_recognizer.recognized.connect(lambda evt: print('RECOGNIZED: {}'.format(evt)))
-speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED: {}'.format(evt)))
+# speech_recognizer.recognized.connect(lambda evt: print('RECOGNIZED: {}'.format(evt)))
+# speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED: {}'.format(evt)))
 # speech_recognizer.session_stopped.connect(lambda evt: print('SESSION STOPPED {}'.format(evt)))
 # speech_recognizer.canceled.connect(lambda evt: print('CANCELED {}'.format(evt)))
-
+# stop continuous recognition on either session stopped or canceled events
 speech_recognizer.session_stopped.connect(stop_cb)
 speech_recognizer.canceled.connect(stop_cb)
 
+# Start continuous speech recognition
 speech_recognizer.start_continuous_recognition()
 while not done:
     time.sleep(.5)
+
+# print("Printing all results:")
+print(" ".join(all_results))
