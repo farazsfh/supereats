@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import BarChart from './BarChart';
 
 const useStyles = makeStyles({
     table: {
@@ -28,31 +29,36 @@ const rows = [
 const Dashboard = () => {
     const classes = useStyles();
 
+    // return (
+    //     <TableContainer component={Paper}>
+    //         <Table className={classes.table} aria-label="simple table">
+    //             <TableHead>
+    //                 <TableRow>
+    //                     <TableCell align="right">Name&nbsp;</TableCell>
+    //                     <TableCell align="right">Adress&nbsp;(g)</TableCell>
+    //                     <TableCell align="right">Units&nbsp;(g)</TableCell>
+    //                     <TableCell align="right">Item&nbsp;(g)</TableCell>
+    //                 </TableRow>
+    //             </TableHead>
+    //             <TableBody>
+    //                 {rows.map((row) => (
+    //                     <TableRow key={row.name}>
+    //                         <TableCell component="th" scope="row">
+    //                             {row.name}
+    //                         </TableCell>
+    //                         <TableCell align="right">{row.adress}</TableCell>
+    //                         <TableCell align="right">{row.quantity}</TableCell>
+    //                         <TableCell align="right">{row.item}</TableCell>
+    //                     </TableRow>
+    //                 ))}
+    //             </TableBody>
+    //         </Table>
+    //     </TableContainer>
+    // );
     return (
-        <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="right">Name&nbsp;</TableCell>
-                        <TableCell align="right">Adress&nbsp;(g)</TableCell>
-                        <TableCell align="right">Units&nbsp;(g)</TableCell>
-                        <TableCell align="right">Item&nbsp;(g)</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="right">{row.adress}</TableCell>
-                            <TableCell align="right">{row.quantity}</TableCell>
-                            <TableCell align="right">{row.item}</TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <div>
+            <BarChart />
+        </div>
     );
 };
 
