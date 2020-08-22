@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import BarChart from './DashboardComponents/BarChart';
 import LineChart from './DashboardComponents/LineChart';
+import OrdersCard from './DashboardComponents/OrdersCard';
 
 const useStyles = makeStyles({
     table: {
@@ -60,6 +61,7 @@ const Dashboard = () => {
         <div>
             <BarChart />
             <LineChart />
+            <OrdersCard />
         </div>
     );
 };
