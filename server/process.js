@@ -1,6 +1,7 @@
 const util = require("util");
 const fs = require("fs");
 const request = require("request");
+const { wordsToNumbers } = require("words-to-numbers");
 
 request
 	.get(process.argv[2])
@@ -12,7 +13,7 @@ request
 		let transcript = "";
 
 		process.stdout.on("data", function (chunk) {
-			transcript = chunk.toString("utf8"); // buffer to string
+			transcript = wordsToNumbers(chunk.toString("utf8")); // buffer to string
 			console.log(transcript);
 		});
 	});
