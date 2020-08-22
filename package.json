@@ -1,24 +1,21 @@
 {
-	"name": "pandemic-hotline",
+	"name": "supereats-server",
 	"version": "1.0.0",
-	"description": "An automated natural language processing grocery store hotline to break down technical barriers during the pandemic.",
-	"main": "server.js",
+	"description": "",
+	"main": "app.js",
 	"scripts": {
-		"client": "npm start --prefix client"
+		"start": "node server.js",
+		"server": "nodemon server.js"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/alif-munim/pandemic-hotline.git"
-	},
+	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/alif-munim/pandemic-hotline/issues"
-	},
-	"homepage": "https://github.com/alif-munim/pandemic-hotline#readme",
 	"dependencies": {
-		"@material-ui/core": "^4.11.0",
-		"chart.js": "^2.9.3",
-		"react-chartjs-2": "^2.10.0"
+		"axios": "^0.20.0",
+		"express": "^4.17.1",
+		"mongoose": "^5.10.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.4"
 	}
 }
