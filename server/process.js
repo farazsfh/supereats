@@ -14,6 +14,6 @@ request
 
 		process.stdout.on("data", function (chunk) {
 			transcript = wordsToNumbers(chunk.toString("utf8")); // buffer to string
-			console.log(transcript);
+			return transcript;
 		});
 	});

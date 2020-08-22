@@ -56,11 +56,11 @@ app.get("/inventory/", async (req, res) => {
 	}
 });
 
-app.delete('/orders', (req, res) => {
+app.delete('/orders/:id', (req, res) => {
     //
 });
 
-app.delete('/items', (req, res) => {
+app.delete('/items/:id', (req, res) => {
     //
 });
 
