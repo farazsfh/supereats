@@ -41,16 +41,21 @@ export const Col = styled.div`
 const Dashboard = () => {
     const classes = useStyles();
     const [orders, setOrders] = useState([{ name: 'Default', address: '1232 Test Drive', items: [] }]);
+    const [commandDates, setCommandDates] = useState([]);
 
     useEffect(() => {
         axios
             .get('http://localhost:5000/orders/')
             .then((res) => {
-                console.log(res.data)
+                console.log(res.data);
                 setOrders(res.data);
+                return res.data;
             })
             .catch((error) => {
                 console.log(error);
+            })
+            .then((result) => {
+                console.log(result);
             });
     }, []);
     // return (
@@ -81,39 +86,42 @@ const Dashboard = () => {
     // );
     return (
         <div>
-        <Grid>
-            <Row>
-                <Col size={1}>
+            <Grid>
+                <Row>
+                    <Col size={1}>
+                        <br></br>
+                        <br></br>
+                        <Text fontWeight={800} fontSize={100} display={'inline-block'} float={'left'}>
+                            Dashboard
+                        </Text>
+                    </Col>
+                </Row>
+                <Row>
                     <br></br>
                     <br></br>
-                    <Text fontWeight={800} fontSize={100} display={'inline-block'} float={'left'}>
-                        Dashboard
-                    </Text>
-                </Col>
-            </Row>
-            <Row>
-                <br></br>
-                <br></br>
-            </Row>
-            <Row>
-                <Col size={1}>
-                    {' '}
-                    <OrdersCard></OrdersCard>
-                </Col>
-                <Col size={2}>
-                    <BarChart></BarChart>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <div></div>
-                </Col>
-                <Col size={1}>
-                    <LineChart />
-                </Col>
-            </Row>
-        </Grid>
-        <h1>{orders[0].address}</h1>
+                </Row>
+                <Row>
+                    <Col size={1}>
+                        {' '}
+                        <OrdersCard></OrdersCard>
+                    </Col>
+                    <Col size={1}>
+                        <LineChart></LineChart>
+                    </Col>
+                    <Col size={2}>
+                        <BarChart></BarChart>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <div></div>
+                    </Col>
+                    <Col size={1}>
+                        <LineChart />
+                    </Col>
+                </Row>
+            </Grid>
+            <h1>{orders[0].address}</h1>
         </div>
     );
 };

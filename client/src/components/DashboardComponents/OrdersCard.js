@@ -72,7 +72,7 @@ class OrdersCard extends Component {
                     elevation={1}
                     float="left"
                     width={600}
-                    height={400}
+                    height={350}
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
