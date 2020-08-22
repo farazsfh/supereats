@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,6 +12,7 @@ import LineChart from './DashboardComponents/LineChart';
 import OrdersCard from './DashboardComponents/OrdersCard';
 import { Text } from 'evergreen-ui';
 import styled from 'styled-components';
+const axios = require('axios');
 
 const useStyles = makeStyles({
     table: {
@@ -39,7 +40,21 @@ export const Col = styled.div`
 `;
 const Dashboard = () => {
     const classes = useStyles();
+    const [orders, setOrders] = useState([{ name: 'Default', address: '1232 Test Drive', items: [] }]);
 
+    useEffect(() => {
+        axios
+            .get('http://localhost:5000/orders/')
+            .then((res) => {
+                setOrders(res.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .then(() => {
+                console.log(orders);
+            });
+    }, []);
     // return (
     //     <TableContainer component={Paper}>
     //         <Table className={classes.table} aria-label="simple table">
