@@ -67,19 +67,20 @@ class OrdersCard extends Component {
     render() {
         return (
             <div>
-                <Card>Hello World</Card>
+                <br />
                 <Pane
                     elevation={1}
                     float="left"
-                    width={200}
-                    height={120}
-                    margin={24}
+                    width={600}
+                    height={400}
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     flexDirection="column"
                 >
-                    <Text size={500}>Orders</Text>
+                    <Text size={700} fontWeight={'1000'} fontSize={'1000'}>
+                        Orders
+                    </Text>
                     <br></br>
                     <CountUp
                         start={-875}

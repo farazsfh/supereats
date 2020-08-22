@@ -10,6 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import BarChart from './DashboardComponents/BarChart';
 import LineChart from './DashboardComponents/LineChart';
 import OrdersCard from './DashboardComponents/OrdersCard';
+import { Text } from 'evergreen-ui';
+import styled from 'styled-components';
 
 const useStyles = makeStyles({
     table: {
@@ -28,6 +30,13 @@ const rows = [
     createData('Faraz', '44 jane street toronto ontario', 5, 'dozen eggs'),
 ];
 
+export const Grid = styled.div``;
+export const Row = styled.div`
+    display: flex;
+`;
+export const Col = styled.div`
+    flex: ${(props) => props.size};
+`;
 const Dashboard = () => {
     const classes = useStyles();
 
@@ -58,11 +67,38 @@ const Dashboard = () => {
     //     </TableContainer>
     // );
     return (
-        <div>
-            <BarChart />
-            <LineChart />
-            <OrdersCard />
-        </div>
+        <Grid>
+            <Row>
+                <Col size={1}>
+                    <br></br>
+                    <br></br>
+                    <Text fontWeight={800} fontSize={100} display={'inline-block'} float={'left'}>
+                        Dashboard
+                    </Text>
+                </Col>
+            </Row>
+            <Row>
+                <br></br>
+                <br></br>
+            </Row>
+            <Row>
+                <Col size={1}>
+                    {' '}
+                    <OrdersCard></OrdersCard>
+                </Col>
+                <Col size={2}>
+                    <BarChart></BarChart>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <div></div>
+                </Col>
+                <Col size={1}>
+                    <LineChart />
+                </Col>
+            </Row>
+        </Grid>
     );
 };
 

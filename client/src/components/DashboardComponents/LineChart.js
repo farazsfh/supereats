@@ -44,7 +44,7 @@ class LineChart extends Component {
     render() {
         return (
             <div className="chart">
-                <Line data={this.state.chartData} width={100} height={200} options={{ maintainAspectRatio: false }} />
+                <Line height={300} data={this.state.chartData} options={{ maintainAspectRatio: false }} />
             </div>
         );
     }

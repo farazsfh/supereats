@@ -58,14 +58,35 @@ class BarChart extends Component {
                 tooltips: {
                     enabled: true,
                 },
+                maintainAspectRatio: false,
             },
         });
     }
 
     render() {
         return (
-            <div className="chart">
-                <Bar data={this.state.chartData} width={100} height={200} options={{ maintainAspectRatio: false }} />
+            <div
+                className="chart"
+                style={{
+                    width: '100%',
+                }}
+
+                // style={{
+                //     position: 'relative',
+                //     width: '1200px',
+                //     height: '500px',
+                //     margin: 'none',
+                //     display: 'inline-block',
+                //     float: 'right',
+                // }}
+            >
+                <Bar
+                    margin={24}
+                    width="600"
+                    height="400"
+                    data={this.state.chartData}
+                    options={{ maintainAspectRatio: false }}
+                />
             </div>
         );
     }
