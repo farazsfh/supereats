@@ -5,16 +5,27 @@ const axios = require('axios');
 
 const exec = require("child_process").execSync;
 const { wordsToNumbers } = require("words-to-numbers");
+const util = require("util");
+const fs = require("fs");
+const request = require("request");
 
 // Bodyparser setup
 const bp = require("body-parser");
 app.use(bp.urlencoded({ extended: true }));
 
+
 let port = process.env.PORT || 8000;
 
-function getTranscription(recordingUrl) {
-    return wordsToNumbers(exec("python3 speech.py ".concat(recordingUrl)).toString("utf8"));
-}
+async function getTranscription(recordingUrl) {
+    return new Promise(function(resolve, reject) {
+        request
+        .get(recordingUrl)
+        .pipe(fs.createWriteStream("audio.wav"))
+        .on("finish", () => {
+            resolve(wordsToNumbers(exec("python3 speech.py").toString("utf8")));
+        });
+    }
+)};
 
 // Route triggers on phone call
 app.post('/voice', (req, res) => {
@@ -26,15 +37,15 @@ app.post('/voice', (req, res) => {
     res.send(twiml.toString());
 });
 
-app.post('/transcribe', (req, res) => {
+app.post('/transcribe', async (req, res) => {
     var recordingUrl = req.body.RecordingUrl;
     recordingUrl = recordingUrl.concat(".wav");
-
-    var transcription = getTranscription(recordingUrl);
+    var transcription = "";
+    transcription = await getTranscription(recordingUrl);
     console.log(transcription);
     transcription = encodeURIComponent(transcription);
     var from = req.body.From;
-    var luisquery = "https://pandemicphoneline-authoring.cognitiveservices.azure.com/luis/prediction/v3.0/apps/be6a92b3-6bb1-4f19-bb84-d4d47439186a/slots/production/predict?subscription-key=dede97f65f9d4b49ad1911601aca2467&verbose=true&show-all-intents=true&log=true&query=";
+    var luisquery = "https://pandemicphoneline.cognitiveservices.azure.com/luis/prediction/v3.0/apps/9a22c5a3-341b-4f41-b5a8-cf08fbdb5084/slots/production/predict?subscription-key=c584e56247e349d9ad6572a9445d0309&verbose=true&show-all-intents=true&log=true&query=";
     luisquery = luisquery.concat(transcription);
     console.log(luisquery);
 
@@ -49,7 +60,7 @@ app.post('/transcribe', (req, res) => {
                 items.push({quantity: Number(itemsJson[i].Quantity[0]), product: itemsJson[i].Product[0]});
             }
 
-            axios.post("http://localhost:5000/orders/add", {name: name, address: address, items: items})
+            axios.post("http://localhost:5000/orders/", {name: name, address: address, items: items})
             .then((res) => {
                 console.log(res)
             })
