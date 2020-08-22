@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
 	res.send("Server is connected.");
 });
 
-app.post("/orders/add", (req, res) => {
+app.post("/orders/", (req, res) => {
 	order = new Order(req.body);
 
 	order
@@ -24,7 +24,16 @@ app.post("/orders/add", (req, res) => {
 		});
 });
 
-app.post("/items/add", (req, res) => {
+app.get("/orders/", async (req, res) => {
+	try {
+		const orders = await Order.find();
+		res.json(orders);
+	} catch (err) {
+		res.json(err);
+	}
+});
+
+app.post("/items/", (req, res) => {
 	item = new Item(req.body);
 
 	order
