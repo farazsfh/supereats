@@ -12,36 +12,39 @@ app.get('/', (req, res) => {
     res.send('Server is connected.')
 });
 
-app.post('/orders/add', (req, res) => {
-    order = new Order(req.body);
+app.post("/orders/", (req, res) => {
+	order = new Order(req.body);
 
-    order.save()
-    .then(data => {
-        res.json(data);
-    })
-    .catch(err => {
-        res.json({message: err});
-    })
+	order
+		.save()
+		.then((data) => {
+			res.json(data);
+		})
+		.catch((err) => {
+			res.json({ message: err });
+		});
 });
 
-app.post('/items/add', (req, res) => {
-    item = new Item(req.body);
-
-    item.save()
-    .then(data => {
-        res.json(data);
-    })
-    .catch(err => {
-        res.json({message: err});
-    })
+app.get("/orders/", async (req, res) => {
+	try {
+		const orders = await Order.find();
+		res.json(orders);
+	} catch (err) {
+		res.json(err);
+	}
 });
 
-app.get('/items', (req, res) => {
-    //
-});
+app.post("/items/", (req, res) => {
+	item = new Item(req.body);
 
-app.get('/orders', (req, res) => {
-    //
+	order
+		.save()
+		.then((data) => {
+			res.json(data);
+		})
+		.catch((err) => {
+			res.json({ message: err });
+		});
 });
 
 app.delete('/orders', (req, res) => {
