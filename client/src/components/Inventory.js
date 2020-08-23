@@ -1,26 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import { Link } from "react-router-dom";
 
 function Inventory() {
+	const [inventory, setInventory] = useState([{}]);
+
 	useEffect(() => {
-		axios.get("http://localhost:5000/inventory/")
-		.then((res) => {
-			console.log(res);
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-	  }, []);
-	
+		axios
+			.get("http://localhost:5000/inventory/")
+			.then((res) => {
+				setInventory(res.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
+
 	return (
-		<div>
-			<Table />;
+		<div className="inventoryTable">
+			<div class="container">
+				{inventory.forEach((inventory) => {
+					console.log(inventory);
+				})}
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Product</th>
+							<th>Amount Sold</th>
+							<th>Stock</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						{inventory.map((inventoryItem) => (
+							<tr>
+								<td>{inventoryItem.product}</td>
+								<td>{inventoryItem.amountSold}</td>
+								<td>{inventoryItem.stock}</td>
+								<Link to={`/orderInfo/${inventoryItem._id}`}>
+									<button type="button" class="btn btn-primary">
+										Update
+									</button>
+								</Link>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 }
