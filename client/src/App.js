@@ -33,8 +33,7 @@ function App() {
 			<Route exact path="/inventory" component={Inventory} />
 			<Route exact path="/orders" component={Orders} />
 			<Route exact path="/archive" component={Archive} />
-			<Route path="/processOrder/:id" component={ProcessOrder} />
-			<Route path="/viewOrder/:id" component={ViewOrder} />
+			<Route path="/orderInfo/:id" component={ProcessOrder} />
 		</Router>
 	);
 }

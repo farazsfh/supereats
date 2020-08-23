@@ -52,7 +52,8 @@ function Orders() {
 						<tr>
 							<td>{order.name}</td>
 							<td>{order.address}</td>
-							<Link to={`/processOrder/${order._id}`}>
+
+							<Link to={`/orderInfo/${order._id}`}>
 								<button type="button" class="btn btn-primary">
 									Process
 								</button>
