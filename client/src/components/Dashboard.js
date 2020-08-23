@@ -13,6 +13,9 @@ import OrdersCard from "./DashboardComponents/OrdersCard";
 import { Text } from "evergreen-ui";
 import styled from "styled-components";
 import LowStockList from "./DashboardComponents/LowStockList";
+
+import BubbleMap from "./BubbleMap";
+
 const axios = require("axios");
 
 const useStyles = makeStyles({
@@ -119,6 +122,7 @@ const Dashboard = () => {
 					</Col>
 				</Row>
 			</Grid>
+			<BubbleMap />
 		</div>
 	);
 };
