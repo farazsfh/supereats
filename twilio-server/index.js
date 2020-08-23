@@ -42,6 +42,7 @@ app.post('/transcribe', async (req, res) => {
     recordingUrl = recordingUrl.concat(".wav");
     var transcription = "";
     transcription = await getTranscription(recordingUrl);
+    var transcriptionText = transcription;
     console.log(transcription);
     transcription = encodeURIComponent(transcription);
     var from = req.body.From;
@@ -69,7 +70,7 @@ app.post('/transcribe', async (req, res) => {
 
                 items.push({quantity: quantity, product: product, form: form, weight: weight});
             }
-            axios.post("http://localhost:5000/orders/", {name: name, address: address, phone: from, items: items})
+            axios.post("http://localhost:5000/orders/", {name: name, address: address, phone: from, transcription: transcriptionText, items: items})
             .then((res) => {
                 console.log(res)
             })
