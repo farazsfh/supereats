@@ -15,23 +15,27 @@ let port = process.env.PORT || 5000;
 app.get("/locations/", async (req, res) => {
 	try {
 		const locations = await Location.find();
-		res.json(locations);
+
+		var featuresArray = [];
+
+		for (var i = 0; i < locations.length; i++) {
+			for (var j = 0; j < locations[i].features.length; j++) {
+				featuresArray.push(locations[i].features[j]);
+			}
+		}
+
+		res.json({type: "FeatureCollection", features: featuresArray});
 	} catch (err) {
 		res.json(err);
 	}
 });
 
 app.post("/locations/", (req, res) => {
-	const location = new Location({
-		any: {
-			type: "Point",
-			coordinates: [-113.806458, 44.847784],
-		},
-		point: {
-			type: "Point",
-			coordinates: [12.123456, 13.134578],
-		},
-	});
+	var type = req.body.type;
+	var geometry = {type: req.body.geometry.type, coordinates: req.body.geometry.coordinates};
+	var obj = {type: type, geometry: geometry};
+	var featuresArray = [obj];
+	location = new Location({type: "FeatureCollection", features: featuresArray})
 
 	location
 		.save()
