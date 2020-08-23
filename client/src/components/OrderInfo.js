@@ -83,6 +83,11 @@ function OrderInfo(props) {
 					Order: {order.name}
 				</h1>
 				<p style={{ textTransform: "capitalize" }}>{order.address}</p>
+				{console.log(order.recordingUrl)}
+				<audio controls>
+					<source key={order.recordingUrl} src={order.recordingUrl} />
+					Your browser does not support the audio tag.
+				</audio>
 				<Transcription order={order} />
 				<table class="table table-bordered">
 					<thead>
