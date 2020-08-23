@@ -24,21 +24,19 @@ class OrdersCard extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{paddingRight: "15px"}}>
                 <br />
                 <Pane
                     elevation={1}
                     float="left"
-                    width={600}
+                    width={450}
                     height={350}
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
                     flexDirection="column"
                 >
-                    <Text size={700} fontWeight={'1000'} fontSize={'1000'}>
-                        Orders
-                    </Text>
+                    <h2>Total Orders</h2>
                     <br></br>
                     <CountUp
                         start={-875}
@@ -53,7 +51,7 @@ class OrdersCard extends Component {
                         delay={0}
                     >
                         {({ countUpRef, start }) => (
-                            <div>
+                            <div style={{fontSize: "30px"}}>
                                 <span ref={countUpRef} />
                             </div>
                         )}

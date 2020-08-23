@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.6.0",
     "axios": "^0.20.0",
+    "azure-maps-control": "^2.0.28",
     "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
     "evergreen-ui": "^5.0.4",
