@@ -2,14 +2,25 @@ import React, { Component } from 'react';
 import CountUp from 'react-countup';
 import { Card, Box } from '@material-ui/core';
 import { Pane, Text } from 'evergreen-ui';
+const axios = require('axios');
 
 class OrdersCard extends Component {
+    orders = 0;
     constructor(props) {
         super(props);
     }
 
     componentWillMount() {
         this.getChartData();
+        axios
+            .get('http://localhost:5000/orders/')
+            .then((res) => {
+                console.log(res.data.length);
+                this.orders = res.data.length;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     getChartData() {
@@ -84,7 +95,7 @@ class OrdersCard extends Component {
                     <br></br>
                     <CountUp
                         start={-875}
-                        end={160527}
+                        end={this.orders}
                         duration={2.75}
                         separator=" "
                         decimals={0}

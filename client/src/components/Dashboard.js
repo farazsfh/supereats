@@ -8,10 +8,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import BarChart from './DashboardComponents/BarChart';
-import LineChart from './DashboardComponents/LineChart';
+import OrdersDate from './DashboardComponents/OrdersDate';
 import OrdersCard from './DashboardComponents/OrdersCard';
 import { Text } from 'evergreen-ui';
 import styled from 'styled-components';
+import LowStockList from './DashboardComponents/LowStockList';
 const axios = require('axios');
 
 const useStyles = makeStyles({
@@ -105,23 +106,16 @@ const Dashboard = () => {
                         {' '}
                         <OrdersCard></OrdersCard>
                     </Col>
-                    <Col size={1}>
-                        <LineChart></LineChart>
-                    </Col>
                     <Col size={2}>
-                        <BarChart></BarChart>
+                        <OrdersDate></OrdersDate>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <div></div>
-                    </Col>
-                    <Col size={1}>
-                        <LineChart />
+                        <LowStockList></LowStockList>
                     </Col>
                 </Row>
             </Grid>
-            <h1>{orders[0].address}</h1>
         </div>
     );
 };
