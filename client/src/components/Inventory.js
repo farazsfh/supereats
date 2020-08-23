@@ -93,7 +93,7 @@ function Inventory() {
 							<th>Price ($)</th>
 							<th>Amount Sold</th>
 							<th>Stock</th>
-							<th>Action</th>
+							{/* <th>Action</th> */}
 						</tr>
 					</thead>
 					<tbody>
@@ -103,13 +103,13 @@ function Inventory() {
 								<td>{inventoryItem.price}</td>
 								<td>{inventoryItem.amountSold}</td>
 								<td>{inventoryItem.stock}</td>
-								<td>
+								{/* <td>
 									<Link to={`/orderInfo/${inventoryItem._id}`}>
 										<button type="button" class="btn btn-primary">
 											Update
 										</button>
 									</Link>
-								</td>
+								</td> */}
 							</tr>
 						))}
 					</tbody>
