@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard";
 import Orders from "./components/Orders";
 import Archive from "./components/Archive";
 import ProcessOrder from "./components/ProcessOrder";
+import ViewOrder from "./components/ViewOrder";
 
 // import styled from 'styled-components';
 
@@ -33,6 +34,7 @@ function App() {
 			<Route exact path="/orders" component={Orders} />
 			<Route exact path="/archive" component={Archive} />
 			<Route path="/processOrder/:id" component={ProcessOrder} />
+			<Route path="/viewOrder/:id" component={ViewOrder} />
 		</Router>
 	);
 }

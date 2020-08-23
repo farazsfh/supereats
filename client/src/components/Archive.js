@@ -29,7 +29,7 @@ function Archive() {
 	  }, []);
 
 	return (
-		<div>
+		<div style={{textTransform: "capitalize"}}>
 			<Table dataSource={archive}>
 				<Table.Column title="Name" dataIndex="name" key="name" />
 				<Table.Column title="Address" dataIndex="address" key="address" />
@@ -37,7 +37,7 @@ function Archive() {
 					title="Action"
 					key="action"
 					render={() => (
-						<Button>Process</Button>
+						<Button style={{color: "white", background: "#29c25b", borderColor: "#3fe687"}} >View Order</Button>
 					)}
 				/>
 			</Table>

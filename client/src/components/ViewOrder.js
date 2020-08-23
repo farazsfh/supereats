@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Table, Button, Column } from "antd";
 
-function ProcessOrder(props) {
+function ViewOrder(props) {
 
     const [order, setOrder] = useState({});
     const [items, setItems] = useState([{}]);
@@ -31,4 +31,4 @@ function ProcessOrder(props) {
 	);
 }
 
-export default ProcessOrder;
+export default ViewOrder;

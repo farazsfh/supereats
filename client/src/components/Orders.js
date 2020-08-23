@@ -29,7 +29,7 @@ function Orders() {
 	  }, []);
 
 	return (
-		<div>
+		<div style={{textTransform: "capitalize"}}>
 			<Table dataSource={orders}>
 				<Table.Column title="Name" dataIndex="name" key="name" />
 				<Table.Column title="Address" dataIndex="address" key="address" />
@@ -37,7 +37,7 @@ function Orders() {
 					title="Action"
 					key="action"
 					render={() => (
-						<Button onClick={() => {process()}}>Process</Button>
+						<Button style={{color: "white", background: "#29c25b", borderColor: "#3fe687"}} onClick={() => {process()}}>Process</Button>
 					)}
 				/>
 			</Table>
