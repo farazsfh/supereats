@@ -50,6 +50,15 @@ app.get("/orders/byId/:id", async (req, res) => {
 	}
 });
 
+app.delete("/orders/byId/:id", async (req, res) => {
+	try {
+		const orders = await Order.findByIdAndDelete(req.params.id);
+		res.json(orders);
+	} catch (err) {
+		res.json(err);
+	}
+});
+
 app.post("/inventory/", (req, res) => {
 	inventory = new Inventory(req.body);
 
@@ -72,12 +81,13 @@ app.get("/inventory/", async (req, res) => {
 	}
 });
 
-app.delete('/orders/:id', (req, res) => {
-    //
-});
-
-app.delete('/items/:id', (req, res) => {
-    //
+app.delete('/inventory/byId/:id', async (req, res) => {
+	try {
+		const inventory = await Inventory.findByIdAndDelete(req.params.id);
+		res.json(orders);
+	} catch (err) {
+		res.json(err);
+	}
 });
 
 const connection = mongoose.connect('mongodb+srv://admin:jakepaul97@supereats.nevls.azure.mongodb.net/supereats?retryWrites=true&w=majority', 
