@@ -86,8 +86,7 @@ const BubbleLayer = () =>
 						AzureMapDataSourceProvider,
 						{
 							id: "BubbleLayer DataSourceProvider",
-							dataFromUrl:
-								"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson",
+							dataFromUrl: "https://api.npoint.io/8e937bc7bf821bf142c2",
 							options: {
 								//Tell the data source to cluster point data.
 								cluster: true,
