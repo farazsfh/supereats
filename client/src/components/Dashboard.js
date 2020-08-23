@@ -13,6 +13,7 @@ import OrdersCard from "./DashboardComponents/OrdersCard";
 import { Text } from "evergreen-ui";
 import styled from "styled-components";
 import LowStockList from "./DashboardComponents/LowStockList";
+import HighSalesList from "./DashboardComponents/HighSalesList";
 
 import BubbleMap from "./BubbleMap";
 
@@ -120,6 +121,9 @@ const Dashboard = () => {
 				<Row>
 					<Col>
 						<LowStockList></LowStockList>
+					</Col>
+					<Col>
+						<HighSalesList></HighSalesList>
 					</Col>
 				</Row>
 			</Grid>
