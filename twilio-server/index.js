@@ -31,7 +31,7 @@ async function getTranscription(recordingUrl) {
 app.post('/voice', (req, res) => {
     const twiml = new VoiceResponse();
     twiml.say('Hello welcome to Super Eats! Please state your name, address and order.');
-    twiml.record({ transcribe: true, recordingStatusCallback: '/transcribe' });
+    twiml.record({ transcribe: true, transcribeCallback: '/transcribe' });
     twiml.hangup();
     res.type('text/xml');
     res.send(twiml.toString());
@@ -57,10 +57,19 @@ app.post('/transcribe', async (req, res) => {
             itemsJson = res.data.prediction.entities.Item;
             var items = [];
             for(var i = 0; i < itemsJson.length; i++) {
-                items.push({quantity: Number(itemsJson[i].Quantity[0]), product: itemsJson[i].Product[0]});
-            }
+                var form = itemsJson[i].Form == undefined ? "" : itemsJson[i].Form[0];
+                var weight = itemsJson[i].Weight == undefined ? "" : itemsJson[i].Weight[0];
+                var quantity = itemsJson[i].Quantity == undefined ? 1 : Number(itemsJson[i].Quantity[0]);
 
-            axios.post("http://localhost:5000/orders/", {name: name, address: address, items: items})
+                if (itemsJson[i].Product == undefined) {
+                    continue;
+                } else {
+                    var product = itemsJson[i].Product[0];
+                }
+
+                items.push({quantity: quantity, product: product, form: form, weight: weight});
+            }
+            axios.post("http://localhost:5000/orders/", {name: name, address: address, phone: from, items: items})
             .then((res) => {
                 console.log(res)
             })
