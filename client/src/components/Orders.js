@@ -35,7 +35,7 @@ function Orders() {
 	}, []);
 
 	return (
-		<div>
+		<div class="orderTable">
 			<div class="container mt-10">
 				{orders.forEach((order) => {
 					console.log(order);

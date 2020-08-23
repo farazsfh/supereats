@@ -35,34 +35,36 @@ function Archive() {
 	}, []);
 
 	return (
-		<div class="container">
-			{archive.forEach((order) => {
-				console.log(order);
-			})}
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Address</th>
-						<th>Items</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					{archive.map((order) => (
+		<div className="orderTable">
+			<div class="container">
+				{archive.forEach((order) => {
+					console.log(order);
+				})}
+				<table class="table table-bordered">
+					<thead>
 						<tr>
-							<td>{order.name}</td>
-							<td>{order.address}</td>
-							<td>{order.items == undefined ? "" : order.items.length}</td>
-							<Link to={`/orderInfo/${order._id}`}>
-								<button type="button" class="btn btn-primary">
-									View
-								</button>
-							</Link>
+							<th>Name</th>
+							<th>Address</th>
+							<th>Items</th>
+							<th>Action</th>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{archive.map((order) => (
+							<tr>
+								<td>{order.name}</td>
+								<td>{order.address}</td>
+								<td>{order.items == undefined ? "" : order.items.length}</td>
+								<Link to={`/orderInfo/${order._id}`}>
+									<button type="button" class="btn btn-primary">
+										View
+									</button>
+								</Link>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 }
