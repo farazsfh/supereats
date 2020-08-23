@@ -6,11 +6,10 @@ import { Button, TextField } from "@material-ui/core";
 
 function Inventory() {
 	const [inventory, setInventory] = useState([{}]);
-	const [todo, setTodo] = useState({
-		id: "",
-		task: "",
-		completed: false,
-	});
+	const [product, setProduct] = useState("");
+	const [stock, setStock] = useState(0);
+	const [amountSold, setAmountSold] = useState(0);
+	const [price, setPrice] = useState(0);
 
 	useEffect(() => {
 		axios
@@ -23,29 +22,58 @@ function Inventory() {
 			});
 	}, []);
 
-	function handleTaskInputChange(e) {}
-	function handleSubmit(e) {}
+	function handleSubmit(e) {
+		console.log(product, stock, amountSold, price);
+		axios.post("http://localhost:5000/inventory/", {
+			product,
+			stock,
+			amountSold,
+			price,
+		});
+	}
 
 	return (
 		<div className="inventoryTable">
 			<div className="container upMargin">
 				<h1>Inventory</h1>
 				<div class="row justify-content-center">
-					<form className="todo-form" onSubmit={handleSubmit}>
+					<form className="form-inline todo-form" onSubmit={handleSubmit}>
 						<TextField
-							label="Item"
+							label="Product"
 							type="text"
 							name="task"
-							value={todo.task}
-							onChange={handleTaskInputChange}
+							value={product}
+							onInput={(e) => setProduct(e.target.value)}
 						/>
-						<label for="quantity">Stock:</label>
+						<label for="quantity">Stock: </label>
 						<input
 							type="number"
 							id="quantity"
 							name="quantity"
 							min="1"
 							max="5"
+							className="form-control mx-3"
+							onInput={(e) => setStock(e.target.value)}
+							value={stock}
+						></input>
+						<label for="quantity">Sold: </label>
+						<input
+							type="number"
+							id="quantity"
+							name="quantity"
+							min="1"
+							max="5"
+							className="form-control mx-3"
+							onInput={(e) => setAmountSold(e.target.value)}
+							value={amountSold}
+						></input>
+						<label for="quantity">Price:</label>
+						<input
+							type="number"
+							step="0.01"
+							className="form-control mx-3"
+							onInput={(e) => setPrice(e.target.value)}
+							value={price}
 						></input>
 						<button type="submit" class="btn btn-primary">
 							Submit
