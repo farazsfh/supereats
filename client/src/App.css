@@ -6,6 +6,10 @@
 	margin-top: 50px;
 }
 
+.header-with-desc {
+	margin-bottom: 5px;
+}
+
 header.masthead {
 	position: relative;
 	overflow: hidden;

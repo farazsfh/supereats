@@ -22,8 +22,8 @@ function OrderInfo(props) {
 	return (
 		<div className="container">
 			<div style={{ textTransform: "capitalize" }} className="orderTable">
-				<h1>{order.name}'s Order</h1>
-				<h2>{order.address}</h2>
+				<h1 className="header-with-desc">Order: {order.name}</h1>
+				<p>{order.address}</p>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
