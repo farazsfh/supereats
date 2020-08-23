@@ -46,7 +46,7 @@ app.post('/transcribe', async (req, res) => {
     console.log(transcriptionText);
     transcription = encodeURIComponent(transcription);
     var from = req.body.From;
-    var luisquery = "https://pandemicphoneline.cognitiveservices.azure.com/luis/prediction/v3.0/apps/9a22c5a3-341b-4f41-b5a8-cf08fbdb5084/slots/production/predict?subscription-key=c584e56247e349d9ad6572a9445d0309&verbose=true&show-all-intents=true&log=true&query=";
+    var luisquery = "https://pandemicphoneline.cognitiveservices.azure.com/luis/prediction/v3.0/apps/ea9b338e-0f16-4271-b071-9da6c95dd716/slots/production/predict?subscription-key=c584e56247e349d9ad6572a9445d0309&verbose=true&show-all-intents=true&log=true&query=";
     luisquery = luisquery.concat(transcription);
     console.log(luisquery);
 
@@ -70,7 +70,7 @@ app.post('/transcribe', async (req, res) => {
 
                 items.push({quantity: quantity, product: product, form: form, weight: weight});
             }
-            axios.post("http://localhost:5000/orders/", {name: name, address: address, phone: from, transcription: transcriptionText, recordingUrl: recordingUrl, items: items})
+            axios.post("https://supereatsserver.azurewebsites.net/orders/", {name: name, address: address, phone: from, transcription: transcriptionText, recordingUrl: recordingUrl, items: items})
             .then((res) => {
                 console.log(res)
             })
