@@ -59,6 +59,15 @@ app.delete("/orders/byId/:id", async (req, res) => {
 	}
 });
 
+app.put("/orders/byId/:id", async (req, res) => {
+	try {
+		const orders = await Order.findByIdAndUpdate(req.params.id, {completed: true});
+		res.json(orders);
+	} catch (err) {
+		res.json(err);
+	}
+});
+
 app.post("/inventory/", (req, res) => {
 	inventory = new Inventory(req.body);
 
