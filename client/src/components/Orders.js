@@ -36,32 +36,35 @@ function Orders() {
 
 	return (
 		<div>
-			{orders.forEach((order) => {
-				console.log(order);
-			})}
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Address</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					{orders.map((order) => (
+			<div class="container mt-10">
+				{orders.forEach((order) => {
+					console.log(order);
+				})}
+				<table class="table table-bordered">
+					<thead>
 						<tr>
-							<td>{order.name}</td>
-							<td>{order.address}</td>
-
-							<Link to={`/orderInfo/${order._id}`}>
-								<button type="button" class="btn btn-primary">
-									Process
-								</button>
-							</Link>
+							<th>Name</th>
+							<th>Address</th>
+							<th>Items</th>
+							<th>Action</th>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{orders.map((order) => (
+							<tr>
+								<td>{order.name}</td>
+								<td>{order.address}</td>
+								<td>{order.items == undefined ? "" : order.items.length}</td>
+								<Link to={`/orderInfo/${order._id}`}>
+									<button type="button" class="btn btn-primary">
+										Process
+									</button>
+								</Link>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 }
