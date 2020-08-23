@@ -4,6 +4,7 @@ import axios from "axios";
 import { quickScore } from "quick-score";
 import classNames from "classnames";
 import Transcription from "./Transcription";
+import DefaultMap from "./AzureMarker.js";
 
 function OrderInfo(props) {
 	const [order, setOrder] = useState([{}]);
@@ -42,8 +43,14 @@ function OrderInfo(props) {
 											invres.data[j].price * orderres.data.items[i].quantity;
 										currsuccItems.push(orderres.data.items[i]);
 										found = true;
-										currChanges.push({id: invres.data[j]._id, stock: invres.data[j].stock - orderres.data.items[i].quantity, 
-											amountSold: invres.data[j].amountSold + orderres.data.items[i].quantity})
+										currChanges.push({
+											id: invres.data[j]._id,
+											stock:
+												invres.data[j].stock - orderres.data.items[i].quantity,
+											amountSold:
+												invres.data[j].amountSold +
+												orderres.data.items[i].quantity,
+										});
 										break;
 									}
 								}
@@ -69,8 +76,13 @@ function OrderInfo(props) {
 	return (
 		<div className="container">
 			<div className="upMargin">
-				<h1 className="header-with-desc" style={{textTransform: "capitalize"}}>Order: {order.name}</h1>
-				<p style={{textTransform: "capitalize"}}>{order.address}</p>
+				<h1
+					className="header-with-desc"
+					style={{ textTransform: "capitalize" }}
+				>
+					Order: {order.name}
+				</h1>
+				<p style={{ textTransform: "capitalize" }}>{order.address}</p>
 				<Transcription order={order} />
 				<table class="table table-bordered">
 					<thead>
@@ -81,7 +93,7 @@ function OrderInfo(props) {
 							<th>Form</th>
 						</tr>
 					</thead>
-					<tbody style={{textTransform: "capitalize"}}>
+					<tbody style={{ textTransform: "capitalize" }}>
 						{/* {order.items == undefined
 							? ""
 							: order.items.map((orderItem) => {
@@ -168,16 +180,19 @@ function OrderInfo(props) {
 							...order,
 							completed: !order.completed,
 						});
-						
+
 						for (var i = 0; i < changes.length; i++) {
-							axios.put(`http://localhost:5000/inventory/byId/${changes[i].id}`, {
-								stock: changes[i].stock,
-								amountSold: changes[i].amountSold
-							}).then((res) => {
-								console.log(res);
-							}).catch((error) => {
-								console.log(error);
-							});
+							axios
+								.put(`http://localhost:5000/inventory/byId/${changes[i].id}`, {
+									stock: changes[i].stock,
+									amountSold: changes[i].amountSold,
+								})
+								.then((res) => {
+									console.log(res);
+								})
+								.catch((error) => {
+									console.log(error);
+								});
 						}
 
 						history.goBack();
@@ -187,6 +202,9 @@ function OrderInfo(props) {
 				</button>
 			</div>
 			<h2 className="mt-3">Total: ${price.toFixed(2)}</h2>
+			<DefaultMap />
+			<br />
+			<br />
 		</div>
 	);
 }

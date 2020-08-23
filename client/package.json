@@ -20,6 +20,7 @@
     "popper.js": "^1.16.1",
     "quick-score": "0.0.9",
     "react": "^16.13.1",
+    "react-azure-maps": "^0.1.2",
     "react-bootstrap": "^1.3.0",
     "react-chartjs-2": "^2.10.0",
     "react-countup": "^4.3.3",
