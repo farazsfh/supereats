@@ -1,22 +1,22 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
-const cors = require('cors');
+const cors = require("cors");
 
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 
-const Order = require('./models/Order');
-const Inventory = require('./models/Inventory');
+const Order = require("./models/Order");
+const Inventory = require("./models/Inventory");
 
 let port = process.env.PORT || 5000;
 
-app.get('/', (req, res) => {
-    res.send('Server is connected.')
+app.get("/", (req, res) => {
+	res.send("Server is connected.");
 });
 
-app.get('/test/', (req, res) => {
-    res.send({count: 1})
+app.get("/test/", (req, res) => {
+	res.send({ count: 1 });
 });
 
 app.post("/orders/", (req, res) => {
@@ -61,7 +61,11 @@ app.delete("/orders/byId/:id", async (req, res) => {
 
 app.put("/orders/byId/:id", async (req, res) => {
 	try {
-		const orders = await Order.findByIdAndUpdate(req.params.id, {completed: true});
+		const orders = await Order.findByIdAndUpdate(req.params.id, {
+			name: req.body.name,
+			address: req.body.address,
+			completed: req.body.completed,
+		});
 		res.json(orders);
 	} catch (err) {
 		res.json(err);
@@ -90,7 +94,7 @@ app.get("/inventory/", async (req, res) => {
 	}
 });
 
-app.delete('/inventory/byId/:id', async (req, res) => {
+app.delete("/inventory/byId/:id", async (req, res) => {
 	try {
 		const inventory = await Inventory.findByIdAndDelete(req.params.id);
 		res.json(orders);
@@ -99,11 +103,38 @@ app.delete('/inventory/byId/:id', async (req, res) => {
 	}
 });
 
-const connection = mongoose.connect('mongodb+srv://admin:jakepaul97@supereats.nevls.azure.mongodb.net/supereats?retryWrites=true&w=majority', 
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    () => console.log('connected!')
+app.get("/inventory/byId/:id", async (req, res) => {
+	try {
+		const inventory = await Inventory.findOne({ _id: req.params.id });
+		res.json(inventory);
+	} catch (err) {
+		res.json(err);
+	}
+});
+
+app.put("/inventory/byId/:id", async (req, res) => {
+	try {
+		const inventory = Inventory.updateOne(
+			{ _id: req.params.id },
+			{
+				product: req.body.product,
+				stock: req.body.stock,
+				price: req.body.price,
+				amountSold: req.body.amountSold,
+			}
+		);
+		res.json(inventory);
+	} catch (err) {
+		res.json(err);
+	}
+});
+
+const connection = mongoose.connect(
+	"mongodb+srv://admin:jakepaul97@supereats.nevls.azure.mongodb.net/supereats?retryWrites=true&w=majority",
+	{ useNewUrlParser: true, useUnifiedTopology: true },
+	() => console.log("connected!")
 );
 
 app.listen(port, () => {
-    console.log(`Server is listening on port ${port}.`);
+	console.log(`Server is listening on port ${port}.`);
 });

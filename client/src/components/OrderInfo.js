@@ -46,6 +46,17 @@ function OrderInfo(props) {
 							  ))}
 					</tbody>
 				</table>
+				<button
+					className="btn btn-primary"
+					onClick={() => {
+						axios.put(`http://localhost:5000/orders/byId/${order._id}`, {
+							...order,
+							completed: !order.completed,
+						});
+					}}
+				>
+					{order.completed == true ? "Unarchive" : "Archive"}
+				</button>
 			</div>
 		</div>
 	);
