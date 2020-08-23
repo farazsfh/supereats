@@ -37,6 +37,7 @@ function Orders() {
 	return (
 		<div class="orderTable">
 			<div class="container mt-10">
+				<h1>Orders</h1>
 				{orders.forEach((order) => {
 					console.log(order);
 				})}
@@ -55,11 +56,13 @@ function Orders() {
 								<td>{order.name}</td>
 								<td>{order.address}</td>
 								<td>{order.items == undefined ? "" : order.items.length}</td>
-								<Link to={`/orderInfo/${order._id}`}>
-									<button type="button" class="btn btn-primary">
-										Process
-									</button>
-								</Link>
+								<td>
+									<Link to={`/orderInfo/${order._id}`}>
+										<button type="button" class="btn btn-primary">
+											Process
+										</button>
+									</Link>
+								</td>
 							</tr>
 						))}
 					</tbody>

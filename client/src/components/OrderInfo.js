@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Table, Button, Column } from "antd";
 
-function ProcessOrder(props) {
+function OrderInfo(props) {
 	const [order, setOrder] = useState({});
 	const [items, setItems] = useState([{}]);
 
@@ -20,10 +20,10 @@ function ProcessOrder(props) {
 	}, []);
 
 	return (
-		<div style={{ textTransform: "capitalize" }}>
-			<h1>{order.name}'s Order</h1>
-			<h2>{order.address}</h2>
-			<div className="container">
+		<div className="container">
+			<div style={{ textTransform: "capitalize" }} className="orderTable">
+				<h1>{order.name}'s Order</h1>
+				<h2>{order.address}</h2>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -47,4 +47,4 @@ function ProcessOrder(props) {
 	);
 }
 
-export default ProcessOrder;
+export default OrderInfo;

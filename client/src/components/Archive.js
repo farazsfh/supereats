@@ -37,6 +37,7 @@ function Archive() {
 	return (
 		<div className="orderTable">
 			<div class="container">
+				<h1>Archive</h1>
 				{archive.forEach((order) => {
 					console.log(order);
 				})}
@@ -55,11 +56,13 @@ function Archive() {
 								<td>{order.name}</td>
 								<td>{order.address}</td>
 								<td>{order.items == undefined ? "" : order.items.length}</td>
-								<Link to={`/orderInfo/${order._id}`}>
-									<button type="button" class="btn btn-primary">
-										View
-									</button>
-								</Link>
+								<td>
+									<Link to={`/orderInfo/${order._id}`}>
+										<button type="button" class="btn btn-primary">
+											View
+										</button>
+									</Link>
+								</td>
 							</tr>
 						))}
 					</tbody>
