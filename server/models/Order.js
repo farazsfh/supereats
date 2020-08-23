@@ -9,6 +9,11 @@ const OrderSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    phone: {
+        type: String,
+        required: false,
+        default: ""
+    },
     items: {
         type: [{
             product: {
@@ -22,11 +27,13 @@ const OrderSchema = new mongoose.Schema({
             },
             weight: {
                 type: String,
-                required: false
+                required: false,
+                default: ""
             },
             form: {
                 type: String,
-                required: false
+                required: false,
+                default: ""
             }
         }],
         required: true
