@@ -50,8 +50,8 @@ function Inventory() {
 							type="number"
 							id="quantity"
 							name="quantity"
-							min="1"
-							max="5"
+							min="0"
+							max="1000"
 							className="form-control mx-3"
 							onInput={(e) => setStock(e.target.value)}
 							value={stock}
@@ -61,8 +61,8 @@ function Inventory() {
 							type="number"
 							id="quantity"
 							name="quantity"
-							min="1"
-							max="5"
+							min="0"
+							max="1000"
 							className="form-control mx-3"
 							onInput={(e) => setAmountSold(e.target.value)}
 							value={amountSold}
@@ -90,6 +90,7 @@ function Inventory() {
 					<thead>
 						<tr>
 							<th>Product</th>
+							<th>Price ($)</th>
 							<th>Amount Sold</th>
 							<th>Stock</th>
 							<th>Action</th>
@@ -99,13 +100,16 @@ function Inventory() {
 						{inventory.map((inventoryItem) => (
 							<tr>
 								<td>{inventoryItem.product}</td>
+								<td>{inventoryItem.price}</td>
 								<td>{inventoryItem.amountSold}</td>
 								<td>{inventoryItem.stock}</td>
-								<Link to={`/orderInfo/${inventoryItem._id}`}>
-									<button type="button" class="btn btn-primary">
-										Update
-									</button>
-								</Link>
+								<td>
+									<Link to={`/orderInfo/${inventoryItem._id}`}>
+										<button type="button" class="btn btn-primary">
+											Update
+										</button>
+									</Link>
+								</td>
 							</tr>
 						))}
 					</tbody>
