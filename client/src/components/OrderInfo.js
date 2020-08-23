@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { Table, Button, Column } from "antd";
 
 function OrderInfo(props) {
+	const history = useHistory();
 	const [order, setOrder] = useState({});
 	const [items, setItems] = useState([{}]);
 
@@ -46,6 +48,7 @@ function OrderInfo(props) {
 							  ))}
 					</tbody>
 				</table>
+
 				<button
 					className="btn btn-primary"
 					onClick={() => {
@@ -53,6 +56,7 @@ function OrderInfo(props) {
 							...order,
 							completed: !order.completed,
 						});
+						history.goBack();
 					}}
 				>
 					{order.completed == true ? "Unarchive" : "Archive"}
