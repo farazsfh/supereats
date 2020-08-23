@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import {quickScore} from "quick-score";
+import { quickScore } from "quick-score";
+import classNames from "classnames";
+import Transcription from "./Transcription";
 
 function OrderInfo(props) {
 	const [order, setOrder] = useState([{}]);
-	const [successfulOrders, setSuccessfulOrders] = useState([]);
-	const [unsuccessfulOrders, setUnsuccessfulOrders] = useState([]);
+	const [succItems, setsuccItems] = useState([]);
+	const [unsuccItems, setUnsuccItems] = useState([]);
 	const [inventory, setInventory] = useState([{}]);
 	const [price, setPrice] = useState(0);
 	const history = useHistory();
@@ -18,34 +20,43 @@ function OrderInfo(props) {
 				setOrder(orderres.data);
 
 				axios
-				.get("http://localhost:5000/inventory/")
-				.then((invres) => {
-					setInventory(invres.data);
-					var currSuccessfulOrders = [];
-					var currUnsuccessfulOrders = [];
-					var currPrice = 0;
-					var found = false;
-					for (var i = 0; i < orderres.data.items.length; i++) {
-						found = false;
-						for (var j = 0; j < invres.data.length; j++) {
-							if (quickScore(invres.data[j].product, orderres.data.items[i].product) > 0.8) {
-								currPrice = currPrice + (invres.data[j].price * orderres.data.items[i].quantity);
-								currSuccessfulOrders.push(orderres.data.items[i])
-								found = true;
-								break;
+					.get("http://localhost:5000/inventory/")
+					.then((invres) => {
+						setInventory(invres.data);
+						var currsuccItems = [];
+						var currUnsuccItems = [];
+						var currPrice = 0;
+						var found = false;
+						for (var i = 0; i < orderres.data.items.length; i++) {
+							found = false;
+							for (var j = 0; j < invres.data.length; j++) {
+								if (
+									quickScore(
+										invres.data[j].product,
+										orderres.data.items[i].product
+									) > 0.8
+								) {
+									currPrice =
+										currPrice +
+										invres.data[j].price * orderres.data.items[i].quantity;
+									currsuccItems.push(orderres.data.items[i]);
+									found = true;
+									break;
+								}
+							}
+							if (found == false) {
+								currUnsuccItems.push(orderres.data.items[i]);
 							}
 						}
-						if (found == false) {
-							currUnsuccessfulOrders.push(orderres.data.items[i]);
-						}
-					}
-					setPrice(currPrice);
-					setSuccessfulOrders(currSuccessfulOrders);
-					setUnsuccessfulOrders(currUnsuccessfulOrders);
-				})
-				.catch((error) => {
-					console.log(error);
-				});
+						setPrice(currPrice);
+						setsuccItems(currsuccItems);
+						setUnsuccItems(currUnsuccItems);
+						console.log(currsuccItems);
+						console.log(currUnsuccItems);
+					})
+					.catch((error) => {
+						console.log(error);
+					});
 			})
 			.catch((error) => {
 				console.log(error);
@@ -54,9 +65,10 @@ function OrderInfo(props) {
 
 	return (
 		<div className="container">
-			<div style={{ textTransform: "capitalize" }} className="upMargin">
+			<div className="upMargin">
 				<h1 className="header-with-desc">Order: {order.name}</h1>
 				<p>{order.address}</p>
+				<Transcription order={order} />
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -67,16 +79,82 @@ function OrderInfo(props) {
 						</tr>
 					</thead>
 					<tbody>
+						{/* {order.items == undefined
+							? ""
+							: order.items.map((orderItem) => {
+									return (
+										<tr>
+											<td>
+												<span className="text-success">
+													{orderItem.product}
+												</span>
+											</td>
+											<td>{orderItem.quantity}</td>
+											<td>
+												{orderItem.weight == "" ? "--" : orderItem.weight}
+											</td>
+											<td>{orderItem.form == "" ? "--" : orderItem.form}</td>
+										</tr>
+									);
+							  })} */}
+
 						{order.items == undefined
 							? ""
-							: order.items.map((orderItem) => (
-									<tr>
-										<td>{orderItem.product}</td>
-										<td>{orderItem.quantity}</td>
-										<td>{orderItem.weight == "" ? "--" : orderItem.weight}</td>
-										<td>{orderItem.form == "" ? "--" : orderItem.form}</td>
-									</tr>
-							  ))}
+							: order.items.map((item) => {
+									const success = succItems.some(
+										(succItem) => succItem.product == item.product
+									)
+										? true
+										: false;
+									return (
+										<tr>
+											<td>
+												<span
+													className={
+														success
+															? "text-success"
+															: "text-danger font-weight-bold"
+													}
+												>
+													{item.product}
+												</span>
+											</td>
+											<td>
+												<span
+													className={
+														success
+															? "text-success"
+															: "text-danger font-weight-bold"
+													}
+												>
+													{item.quantity}
+												</span>
+											</td>
+											<td>
+												<span
+													className={
+														success
+															? "text-success"
+															: "text-danger font-weight-bold"
+													}
+												>
+													{item.weight == "" ? "--" : item.weight}
+												</span>
+											</td>
+											<td>
+												<span
+													className={
+														success
+															? "text-success"
+															: "text-danger font-weight-bold"
+													}
+												>
+													{item.form == "" ? "--" : item.form}
+												</span>
+											</td>
+										</tr>
+									);
+							  })}
 					</tbody>
 				</table>
 
@@ -93,7 +171,7 @@ function OrderInfo(props) {
 					{order.completed == true ? "Unarchive" : "Archive"}
 				</button>
 			</div>
-			<h1>${price.toFixed(2)}</h1>
+			<h2 className="mt-3">Total: ${price.toFixed(2)}</h2>
 		</div>
 	);
 }

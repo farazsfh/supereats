@@ -15,6 +15,11 @@
 	width: 80%;
 }
 
+.myHighlight {
+	background-color: rgba(29, 169, 29, 0.64);
+	color: white;
+}
+
 header.masthead {
 	position: relative;
 	overflow: hidden;
@@ -34,10 +39,12 @@ header.masthead .masthead-content {
 
 header.masthead .masthead-content .masthead-heading {
 	font-size: 4rem;
+	color: white;
 }
 
 header.masthead .masthead-content .masthead-subheading {
 	font-size: 2rem;
+	color: white;
 }
 
 header.masthead .bg-circle {
