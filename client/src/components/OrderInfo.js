@@ -29,6 +29,8 @@ function OrderInfo(props) {
 						<tr>
 							<th>Product</th>
 							<th>Quantity</th>
+							<th>Weight</th>
+							<th>Form</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -38,6 +40,8 @@ function OrderInfo(props) {
 									<tr>
 										<td>{orderItem.product}</td>
 										<td>{orderItem.quantity}</td>
+										<td>{orderItem.weight == "" ? "--" : orderItem.weight}</td>
+										<td>{orderItem.form == "" ? "--" : orderItem.form}</td>
 									</tr>
 							  ))}
 					</tbody>
