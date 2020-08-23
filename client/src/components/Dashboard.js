@@ -12,6 +12,7 @@ import LineChart from './DashboardComponents/LineChart';
 import OrdersCard from './DashboardComponents/OrdersCard';
 import { Text } from 'evergreen-ui';
 import styled from 'styled-components';
+import LowStockList from './DashboardComponents/LowStockList';
 const axios = require('axios');
 
 const useStyles = makeStyles({
@@ -114,7 +115,7 @@ const Dashboard = () => {
                 </Row>
                 <Row>
                     <Col>
-                        <div></div>
+                        <LowStockList></LowStockList>
                     </Col>
                     <Col size={1}>
                         <LineChart />
