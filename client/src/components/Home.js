@@ -38,10 +38,9 @@ function Home() {
 							<div className="p-5">
 								<h2 className="display-4">Speech To Text</h2>
 								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-									aliquid, mollitia odio veniam sit iste esse assumenda amet
-									aperiam exercitationem, ea animi blanditiis recusandae!
-									Ratione voluptatum molestiae adipisci, beatae obcaecati.
+								Using a number of useful APIs, our project is able to take the user’s input in the form of a phone call 
+								and transform it to text so that our algorithms may interpret and extrapolate the user’s request. Using 
+								Microsoft Azure’s speech to text service we are able to get accurate transcriptions of the primary stakeholder’s order. 
 								</p>
 							</div>
 						</div>
@@ -65,10 +64,9 @@ function Home() {
 							<div className="p-5">
 								<h2 className="display-4">Natural Language Processing</h2>
 								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-									aliquid, mollitia odio veniam sit iste esse assumenda amet
-									aperiam exercitationem, ea animi blanditiis recusandae!
-									Ratione voluptatum molestiae adipisci, beatae obcaecati.
+								A very useful tool in the realm of computer science, and the heart of our project, natural language processing 
+								allows us to understand the user’s needs. It is the link between spoken words and processing so to speak. As the 
+								name suggests we are able to process commands given in the english language using Azure’s LUIS (Language Understanding). 
 								</p>
 							</div>
 						</div>
@@ -92,10 +90,9 @@ function Home() {
 							<div className="p-5">
 								<h2 className="display-4">User-Friendly Interface</h2>
 								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-									aliquid, mollitia odio veniam sit iste esse assumenda amet
-									aperiam exercitationem, ea animi blanditiis recusandae!
-									Ratione voluptatum molestiae adipisci, beatae obcaecati.
+								Super Eats was created first and foremost with the user in mind, whether that be the customer placing 
+								the order, the employee who receives it or the company which it hosts. Patrons wishing to use this service 
+								simply need to call the provided number and follow the prompt for quick and easy service. 
 								</p>
 							</div>
 						</div>

@@ -50,7 +50,7 @@ function Orders() {
 							<th>Action</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody style={{textTransform: "capitalize"}}>
 						{orders.map((order) => (
 							<tr>
 								<td>{order.name}</td>

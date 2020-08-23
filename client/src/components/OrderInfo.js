@@ -36,12 +36,14 @@ function OrderInfo(props) {
 										orderres.data.items[i].product
 									) > 0.8
 								) {
-									currPrice =
-										currPrice +
-										invres.data[j].price * orderres.data.items[i].quantity;
-									currsuccItems.push(orderres.data.items[i]);
-									found = true;
-									break;
+									if (orderres.data.items[i].quantity <= invres.data[j].stock) {
+										currPrice =
+											currPrice +
+											invres.data[j].price * orderres.data.items[i].quantity;
+										currsuccItems.push(orderres.data.items[i]);
+										found = true;
+										break;
+									}
 								}
 							}
 							if (found == false) {
@@ -78,7 +80,7 @@ function OrderInfo(props) {
 							<th>Form</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody style={{textTransform: "capitalize"}}>
 						{/* {order.items == undefined
 							? ""
 							: order.items.map((orderItem) => {

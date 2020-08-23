@@ -96,7 +96,7 @@ function Inventory() {
 							{/* <th>Action</th> */}
 						</tr>
 					</thead>
-					<tbody>
+					<tbody style={{textTransform: "capitalize"}}>
 						{inventory.map((inventoryItem) => (
 							<tr>
 								<td>{inventoryItem.product}</td>
