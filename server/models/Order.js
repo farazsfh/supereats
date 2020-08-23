@@ -19,6 +19,11 @@ const OrderSchema = new mongoose.Schema({
         required: true,
         default: ""
     },
+    recordingUrl: {
+        type: String,
+        required: true,
+        default: ""
+    },
     items: {
         type: [{
             product: {
