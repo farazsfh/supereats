@@ -6,25 +6,11 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-var GeoJSON = require("mongoose-geojson-schema");
-var mongoose = require("mongoose");
+const Order = require("./models/Order");
+const Inventory = require("./models/Inventory");
+const Location = require("./models/Location");
 
-var schema = new mongoose.Schema({
-	any: mongoose.Schema.Types.GeoJSON,
-	point: mongoose.Schema.Types.Point,
-	multipoint: mongoose.Schema.Types.MultiPoint,
-	linestring: mongoose.Schema.Types.LineString,
-	multilinestring: mongoose.Schema.Types.MultiLineString,
-	polygon: mongoose.Schema.Types.Polygon,
-	multipolygon: mongoose.Schema.Types.MultiPolygon,
-	geometry: mongoose.Schema.Types.Geometry,
-	geometrycollection: mongoose.Schema.Types.GeometryCollection,
-	feature: mongoose.Schema.Types.Feature,
-	featurecollection: mongoose.Schema.Types.FeatureCollection,
-});
-
-var db = mongoose.createConnection("localhost", "test");
-var Location = db.model("GeoJSON", schema);
+let port = process.env.PORT || 5000;
 
 app.get("/locations/", async (req, res) => {
 	try {
@@ -57,10 +43,6 @@ app.post("/locations/", (req, res) => {
 		});
 });
 
-const Order = require("./models/Order");
-const Inventory = require("./models/Inventory");
-
-let port = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
 	res.send("Server is connected.");
