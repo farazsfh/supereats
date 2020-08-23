@@ -21,7 +21,7 @@ function Archive() {
 	useEffect(() => {
 		axios.get("http://localhost:5000/orders/")
 		.then((res) => {
-			setArchive(res.data);
+			setArchive(res.data.filter(function(order) {return order.completed == true;}));
 		})
 		.catch((error) => {
 			console.log(error);

@@ -21,7 +21,7 @@ function Orders() {
 	useEffect(() => {
 		axios.get("http://localhost:5000/orders/")
 		.then((res) => {
-			setOrders(res.data);
+			setOrders(res.data.filter(function(order) {return order.completed == false;}));
 		})
 		.catch((error) => {
 			console.log(error);
