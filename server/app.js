@@ -114,16 +114,11 @@ app.get("/inventory/byId/:id", async (req, res) => {
 
 app.put("/inventory/byId/:id", async (req, res) => {
 	try {
-		const inventory = Inventory.updateOne(
-			{ _id: req.params.id },
-			{
-				product: req.body.product,
-				stock: req.body.stock,
-				price: req.body.price,
-				amountSold: req.body.amountSold,
-			}
-		);
-		res.json(inventory);
+		const inventory = await Inventory.findByIdAndUpdate(req.params.id, {
+			stock: req.body.stock,
+			amountSold: req.body.amountSold
+		});
+		res.json(orders);
 	} catch (err) {
 		res.json(err);
 	}

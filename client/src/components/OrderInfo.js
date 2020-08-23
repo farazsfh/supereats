@@ -9,7 +9,7 @@ function OrderInfo(props) {
 	const [order, setOrder] = useState([{}]);
 	const [succItems, setsuccItems] = useState([]);
 	const [unsuccItems, setUnsuccItems] = useState([]);
-	const [inventory, setInventory] = useState([{}]);
+	const [changes, setChanges] = useState([{}]);
 	const [price, setPrice] = useState(0);
 	const history = useHistory();
 
@@ -22,9 +22,9 @@ function OrderInfo(props) {
 				axios
 					.get("http://localhost:5000/inventory/")
 					.then((invres) => {
-						setInventory(invres.data);
 						var currsuccItems = [];
 						var currUnsuccItems = [];
+						var currChanges = [];
 						var currPrice = 0;
 						var found = false;
 						for (var i = 0; i < orderres.data.items.length; i++) {
@@ -42,6 +42,8 @@ function OrderInfo(props) {
 											invres.data[j].price * orderres.data.items[i].quantity;
 										currsuccItems.push(orderres.data.items[i]);
 										found = true;
+										currChanges.push({id: invres.data[j]._id, stock: invres.data[j].stock - orderres.data.items[i].quantity, 
+											amountSold: invres.data[j].amountSold + orderres.data.items[i].quantity})
 										break;
 									}
 								}
@@ -53,8 +55,7 @@ function OrderInfo(props) {
 						setPrice(currPrice);
 						setsuccItems(currsuccItems);
 						setUnsuccItems(currUnsuccItems);
-						console.log(currsuccItems);
-						console.log(currUnsuccItems);
+						setChanges(currChanges);
 					})
 					.catch((error) => {
 						console.log(error);
@@ -68,8 +69,8 @@ function OrderInfo(props) {
 	return (
 		<div className="container">
 			<div className="upMargin">
-				<h1 className="header-with-desc">Order: {order.name}</h1>
-				<p>{order.address}</p>
+				<h1 className="header-with-desc" style={{textTransform: "capitalize"}}>Order: {order.name}</h1>
+				<p style={{textTransform: "capitalize"}}>{order.address}</p>
 				<Transcription order={order} />
 				<table class="table table-bordered">
 					<thead>
@@ -167,6 +168,18 @@ function OrderInfo(props) {
 							...order,
 							completed: !order.completed,
 						});
+						
+						for (var i = 0; i < changes.length; i++) {
+							axios.put(`http://localhost:5000/inventory/byId/${changes[i].id}`, {
+								stock: changes[i].stock,
+								amountSold: changes[i].amountSold
+							}).then((res) => {
+								console.log(res);
+							}).catch((error) => {
+								console.log(error);
+							});
+						}
+
 						history.goBack();
 					}}
 				>
