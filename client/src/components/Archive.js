@@ -50,7 +50,7 @@ function Archive() {
 							<th>Action</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody style={{textTransform: "capitalize"}}>
 						{archive.map((order) => (
 							<tr>
 								<td>{order.name}</td>
