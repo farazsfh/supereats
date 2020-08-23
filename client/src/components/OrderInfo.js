@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import {quickScore} from "quick-score";
 
@@ -8,6 +9,7 @@ function OrderInfo(props) {
 	const [unsuccessfulOrders, setUnsuccessfulOrders] = useState([]);
 	const [inventory, setInventory] = useState([{}]);
 	const [price, setPrice] = useState(0);
+	const history = useHistory();
 
 	useEffect(() => {
 		axios
@@ -77,6 +79,7 @@ function OrderInfo(props) {
 							  ))}
 					</tbody>
 				</table>
+
 				<button
 					className="btn btn-primary"
 					onClick={() => {
@@ -84,6 +87,7 @@ function OrderInfo(props) {
 							...order,
 							completed: !order.completed,
 						});
+						history.goBack();
 					}}
 				>
 					{order.completed == true ? "Unarchive" : "Archive"}
