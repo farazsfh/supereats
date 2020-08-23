@@ -51,6 +51,8 @@ const HighSalesStock = () => {
     }, []);
 
     return (
+        <div>
+            <h4>Sales</h4>
         <List className={classes.root}>
             <ListItem>
                 <ListItemAvatar>
@@ -85,6 +87,7 @@ const HighSalesStock = () => {
                 <ListItemText primary={lowProduct[0]} secondary={lowStock[0]} />
             </ListItem>
         </List>
+        </div>
     );
 };
 
