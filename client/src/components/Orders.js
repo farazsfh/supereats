@@ -35,7 +35,6 @@ function Orders() {
 	}, []);
 
 	return (
-<<<<<<< HEAD
 		<div>
 			{orders.forEach((order) => {
 				console.log(order);
@@ -62,20 +61,6 @@ function Orders() {
 					))}
 				</tbody>
 			</table>
-=======
-		<div style={{textTransform: "capitalize"}}>
-			<Table dataSource={orders}>
-				<Table.Column title="Name" dataIndex="name" key="name" />
-				<Table.Column title="Address" dataIndex="address" key="address" />
-				<Table.Column
-					title="Action"
-					key="action"
-					render={() => (
-						<Button style={{color: "white", background: "#29c25b", borderColor: "#3fe687"}} onClick={() => {process()}}>Process</Button>
-					)}
-				/>
-			</Table>
->>>>>>> 00dbbb0bd4456ada5cd8f73b03084634a02e7977
 		</div>
 	);
 }
