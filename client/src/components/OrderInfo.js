@@ -1,18 +1,49 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Table, Button, Column } from "antd";
+import {quickScore} from "quick-score";
 
 function OrderInfo(props) {
-	const [order, setOrder] = useState({});
-	const [items, setItems] = useState([{}]);
+	const [order, setOrder] = useState([{}]);
+	const [successfulOrders, setSuccessfulOrders] = useState([]);
+	const [unsuccessfulOrders, setUnsuccessfulOrders] = useState([]);
+	const [inventory, setInventory] = useState([{}]);
+	const [price, setPrice] = useState(0);
 
 	useEffect(() => {
 		axios
 			.get("http://localhost:5000/orders/byId/".concat(props.match.params.id))
-			.then((res) => {
-				setOrder(res.data);
-				setItems(res.data.items);
-				console.log(res.data.items);
+			.then((orderres) => {
+				setOrder(orderres.data);
+
+				axios
+				.get("http://localhost:5000/inventory/")
+				.then((invres) => {
+					setInventory(invres.data);
+					var currSuccessfulOrders = [];
+					var currUnsuccessfulOrders = [];
+					var currPrice = 0;
+					var found = false;
+					for (var i = 0; i < orderres.data.items.length; i++) {
+						found = false;
+						for (var j = 0; j < invres.data.length; j++) {
+							if (quickScore(invres.data[j].product, orderres.data.items[i].product) > 0.8) {
+								currPrice = currPrice + (invres.data[j].price * orderres.data.items[i].quantity);
+								currSuccessfulOrders.push(orderres.data.items[i])
+								found = true;
+								break;
+							}
+						}
+						if (found == false) {
+							currUnsuccessfulOrders.push(orderres.data.items[i]);
+						}
+					}
+					setPrice(currPrice);
+					setSuccessfulOrders(currSuccessfulOrders);
+					setUnsuccessfulOrders(currUnsuccessfulOrders);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 			})
 			.catch((error) => {
 				console.log(error);
@@ -58,6 +89,7 @@ function OrderInfo(props) {
 					{order.completed == true ? "Unarchive" : "Archive"}
 				</button>
 			</div>
+			<h1>${price.toFixed(2)}</h1>
 		</div>
 	);
 }
