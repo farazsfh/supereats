@@ -60,7 +60,7 @@ function Transcription({ order }) {
 				<br />
 				<form action="" className="form-inline">
 					<div class="input-group mb-2 mr-sm-2">
-						<p>Customer: </p>
+						<p style={{fontFamily: "sans-serif"}}>Customer: </p>
 						<br />
 						<Switch
 							className="mt-2 mr-2"
@@ -69,7 +69,7 @@ function Transcription({ order }) {
 						/>
 					</div>
 					<div class="input-group mb-2 mr-sm-2">
-						<p>Product: </p>
+						<p style={{fontFamily: "sans-serif"}}>Product: </p>
 						<br />
 						<Switch
 							className="mt-2 mr-2"
@@ -78,7 +78,7 @@ function Transcription({ order }) {
 						/>
 					</div>
 					<div class="input-group mb-2 mr-sm-2">
-						<p>Quantity: </p>
+						<p style={{fontFamily: "sans-serif"}}>Quantity: </p>
 						<br />
 						<Switch
 							className="mt-2 mr-2"
