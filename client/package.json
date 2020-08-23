@@ -27,6 +27,7 @@
     "react-material-ui-number-input": "^1.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "recharts": "^1.8.5",
     "styled-components": "^5.1.1"
   },
   "scripts": {

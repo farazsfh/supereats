@@ -107,7 +107,7 @@ const Dashboard = () => {
                         <OrdersCard></OrdersCard>
                     </Col>
                     <Col size={2}>
-                        <BarChart></BarChart>
+                        <OrdersDate></OrdersDate>
                     </Col>
                 </Row>
                 <Row>
@@ -116,7 +116,6 @@ const Dashboard = () => {
                     </Col>
                 </Row>
             </Grid>
-            <h1>{orders[0].address}</h1>
         </div>
     );
 };
