@@ -2,12 +2,17 @@
 
 /* Orders */
 
-.orderTable {
+.upMargin {
 	margin-top: 50px;
 }
 
 .header-with-desc {
 	margin-bottom: 5px;
+}
+
+.center {
+	margin: 0 auto;
+	width: 80%;
 }
 
 header.masthead {

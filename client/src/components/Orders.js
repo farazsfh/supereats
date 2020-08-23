@@ -35,7 +35,7 @@ function Orders() {
 	}, []);
 
 	return (
-		<div class="orderTable">
+		<div class="upMargin">
 			<div class="container mt-10">
 				<h1>Orders</h1>
 				{orders.forEach((order) => {

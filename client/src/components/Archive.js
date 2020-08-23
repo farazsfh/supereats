@@ -35,7 +35,7 @@ function Archive() {
 	}, []);
 
 	return (
-		<div className="orderTable">
+		<div className="upMargin">
 			<div class="container">
 				<h1>Archive</h1>
 				{archive.forEach((order) => {

@@ -21,7 +21,7 @@ function OrderInfo(props) {
 
 	return (
 		<div className="container">
-			<div style={{ textTransform: "capitalize" }} className="orderTable">
+			<div style={{ textTransform: "capitalize" }} className="upMargin">
 				<h1 className="header-with-desc">Order: {order.name}</h1>
 				<p>{order.address}</p>
 				<table class="table table-bordered">
