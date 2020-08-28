@@ -46,7 +46,7 @@ app.post('/transcribe', async (req, res) => {
     console.log(transcriptionText);
     transcription = encodeURIComponent(transcription);
     var from = req.body.From;
-    var luisquery = "https://pandemicphoneline.cognitiveservices.azure.com/luis/prediction/v3.0/apps/ea9b338e-0f16-4271-b071-9da6c95dd716/slots/production/predict?subscription-key=c584e56247e349d9ad6572a9445d0309&verbose=true&show-all-intents=true&log=true&query=";
+    var luisquery = "AZURE_LUIS_QUERY";
     luisquery = luisquery.concat(transcription);
     console.log(luisquery);
 
