@@ -162,7 +162,7 @@ app.put("/inventory/byId/:id", async (req, res) => {
 });
 
 const connection = mongoose.connect(
-	"mongodb+srv://admin:jakepaul97@supereats.nevls.azure.mongodb.net/supereats?retryWrites=true&w=majority",
+	"MONGODB_URL",
 	{ useNewUrlParser: true, useUnifiedTopology: true },
 	() => console.log("connected!")
 );
